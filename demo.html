@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link
+  type="text/css"
+  rel="stylesheet"
+  href="https://unpkg.com/jsmind@0.5/style/jsmind.css"
+/>
+<script type="text/javascript" src="https://unpkg.com/jsmind@0.5/es6/jsmind.js"></script>
+  <style>
+    #jsmind_container{
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p id="myname"></p>
+    <p id="female"></p>
+    <p id="age"></p>
+    <input type="text" oninput="obj.name=this.value">
+
+    <div id="jsmind_container"></div>
+
+   
+  </div>
+  <script type="text/javascript">
+    var mind = {
+        // 3 data formats were supported ...
+        // see documents for more information
+        meta:{
+                name:'公司组织架构图',
+                author:'poya',
+                version:'0.2'
+            },
+            format:'node_array',
+            data:[
+                {"id":"root", "isroot":true, "topic":"X科技有限公司"},
+
+                {"id":"sub1", "parentid":"root", "topic":"国际部"},
+                {"id":"sub11", "parentid":"sub1", "topic":"美国国际部"},
+                {"id":"sub12", "parentid":"sub1", "topic":"德国国际部"},
+                {"id":"sub13", "parentid":"sub1", "topic":"俄罗斯国际部"},
+
+                {"id":"sub2", "parentid":"root", "topic":"营销部"},
+                {"id":"sub21", "parentid":"sub2", "topic":"商务中心"},
+                {"id":"sub22", "parentid":"sub2", "topic":"销售部"},
+                {"id":"sub23", "parentid":"sub2", "topic":"售后服务部"},
+
+                {"id":"sub3", "parentid":"root", "topic":"监察部"},
+
+                {"id":"sub4", "parentid":"root", "topic":"质管部"},
+                {"id":"sub41", "parentid":"sub4", "topic":"质管部"},
+                {"id":"sub42", "parentid":"sub4", "topic":"质检部"},
+            ]
+    };
+    var options = {
+        container: 'jsmind_container',
+        theme: 'orange',
+        editable: true,
+    };
+    var jm = new jsMind(options);
+    jm.show(mind);
+</script>
+  <script src="./src/utils/vue2min.js"></script>
+</body>
+</html>
