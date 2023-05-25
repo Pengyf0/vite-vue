@@ -1,19 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import os from 'os'
-// function getLocalIP() {
-//   let interfaces = os.networkInterfaces()
-//   for (let devName in interfaces) {
-//     let iface = interfaces[devName]
-//     for (let i = 0; i < iface.length; i++) {
-//       let alias = iface[i]
-//       if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-//         return alias.address
-//       }
-//     }
-//   }
-// }
-// const ip = getLocalIP()
-// console.log('内网地址', ip)
+
 // 官网可知：下面没有指定webpackChunkName，每个组件打包成一个js文件。
 // const Foo = () => import('../components/Foo')
 // const Aoo = () => import('../components/Aoo')

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>ifram演示页面</title>
   <link
   type="text/css"
   rel="stylesheet"
@@ -12,22 +12,38 @@
 />
 <script type="text/javascript" src="https://unpkg.com/jsmind@0.5/es6/jsmind.js"></script>
   <style>
+    body{
+      background: #fff;
+    }
     #jsmind_container{
       height: 400px;
+      border:1px solid #d2d2d2;
     }
+    .input{
+      display: flex;
+      align-items: center;
+    }
+    .inputs{
+      display: flex;
+      flex-direction: column;
+    }
+   
   </style>
 </head>
 <body>
-  <div>
+  <div class="input">
+   <div class="inputs">
+    <p> <input type="text" oninput="obj.name=this.value"></p>
+    <p> <input type="text" oninput="obj.female=this.value"></p>
+    <p> <input type="text" oninput="obj.age=this.value"></p>
+   </div>
+   <div class="inputs">
     <p id="myname"></p>
     <p id="female"></p>
     <p id="age"></p>
-    <input type="text" oninput="obj.name=this.value">
-
-    <div id="jsmind_container"></div>
-
-   
+   </div>
   </div>
+  <div id="jsmind_container"></div>
   <script type="text/javascript">
     var mind = {
         // 3 data formats were supported ...

@@ -6,7 +6,7 @@ let obj = {
 observer(obj)
 
 function setName() {
-  document.querySelector("#myname").textContent = "名字:" + obj.name + obj.age;
+  document.querySelector("#myname").textContent = "名字/年龄:" + obj.name + '/' + obj.age;
 }
 function setFemale() {
   document.querySelector("#female").textContent = "性别:" + obj.female;

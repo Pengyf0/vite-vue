@@ -27,7 +27,8 @@
       </template>
       <div class="webSocket">
         <div id="chat-container">
-          {{ messageArr }}
+          <!-- {{ messageArr }} -->
+          <p v-for="(item, ind) of messageArr" :key="ind">{{ item }}</p>
         </div>
         <input type="text" v-model="soketMessage">
         <el-button type="primary" size="small" @click="toSendMessage">Send</el-button>
@@ -72,9 +73,7 @@
           echartsDemo
         </div>
       </template>
-      <div ref="mychart" class="chart" style="">
-
-      </div>
+      <div ref="mychart" class="chart"></div>
     </el-card>
     <el-card class="box-card">
       <template #header>
@@ -100,26 +99,53 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          echartsDemo
+          Button
         </div>
       </template>
-      <button class="btnPrimary" @click="btnC">
-        主要按钮
+      <button class="btnPrimary">
+        点击波纹
       </button>
+      <div class="btn2">
+        <button class="btnPrimary2">
+          刀光一闪
+        </button>
+      </div>
+      <div class="btn3">
+        <button class="btnPrimary3">
+          霓虹灯光
+        </button>
+      </div>
+
     </el-card>
+    <el-card class="box-card">
+      <template #header>
+        <div class="card-header">
+          图片
+        </div>
+      </template>
+      <div class="imgChange">
+        <images :images="imgs"></images>
+      </div>
+
+    </el-card>
+
 
 
   </div>
 </template>
 <script setup>
-import { ref, onMounted, inject } from "vue";
+import { ref, onMounted, inject, reactive } from "vue";
 import { debounce, throttle2 } from "@/utils/debounce.js"
-var ip = window.location.host;
-console.log("ip", ip.split(":")[0])
+import images from "@/components/mouseImg/CompareImage.vue"
+import bg6 from '@/assets/images/bg6.jpeg'
+import bg7 from '@/assets/images/bg7.jpeg'
+
+const imgs = ref([bg6, bg7])
 
 
 
 
+let ip = window.LOCAL_IP
 
 // import * as echarts from 'echarts'
 const echarts = inject('echarts')
@@ -168,26 +194,15 @@ let messageArr = ref([])
 //   closeSoket()
 // }
 let socket;
-socket = new WebSocket('ws://192.168.1.59:8800')
+socket = new WebSocket(`ws://${ip}:8800`)
 socket.addEventListener('open', () => { messageArr.value.push('连接成功~') })
 socket.addEventListener('close', () => { messageArr.value.push('连接关闭!') })
 
-
-// socket.onopen = () => {
-//   console.log('Connected to WebSocket server');
-//   socket.send('Hello, WebSocket server!');
-// };
 socket.onmessage = (message) => {
   console.log(`Received message => ${message.data}`);
   receivedMessage(message)
   // 将消息展示在页面上，如添加到聊天记录等
 };
-// socket.onerror = (error) => {
-//   console.error(`WebSocket error: ${error}`);
-// };
-// socket.onclose = () => {
-//   console.log('Disconnected from WebSocket server');
-// };
 function toSendMessage() {
   messageArr.value.push(soketMessage.value)
   socket.send(soketMessage.value)
@@ -216,7 +231,6 @@ function closeSoket() {
   socket.close()
 }
 let mychart = ref(null)
-let isSpan = ref(false)
 onMounted(() => {
   let chart1 = echarts.init(mychart.value);
   // 绘制图表
@@ -237,29 +251,16 @@ onMounted(() => {
       }
     ]
   });
+  addWave()
+})
 
+function addWave() {//增加按钮波纹
   let box = document.querySelector('.btnPrimary');
-  let span = document.querySelector('.btnPrimary .span');
-  function isSpanClick() {
-    alert(66)
-    console.log('结束了', 88)
-    // box.remove(newSpan)
-  }
   box.addEventListener('click', function (e) {
-    // isSpan.value = true
-    // let boundingBox = this.getBoundingClientRect()
-    // let x = e.clientX - boundingBox.left
-    // let y = e.clientY - boundingBox.top
-    // span.style.left = x + 'px'
-    // span.style.top = y + 'px'
-    // setTimeout(() => {
-    //   isSpan.value = false
-    // }, 1000)
     let boundingBox = this.getBoundingClientRect()
     let x = e.clientX - boundingBox.left
     let y = e.clientY - boundingBox.top
     let newSpan = document.createElement('span')
-    console.log(x, y, 999)
     box.appendChild(newSpan)
     newSpan.style.cssText += `left:${x}px;top:${y}px;position: absolute;
       transform: translate(-50%, -50%);
@@ -290,12 +291,9 @@ onMounted(() => {
       newSpan.remove()
     }, 1000)
   })
-})
-
-function btnC(i) {
-
-  // newSpan.style.csstext += `left:${x};top:${y}`
 }
+
+
 
 
 
@@ -609,24 +607,107 @@ function btnC(i) {
         opacity: 0;
       }
     }
+  }
 
-    .span {
-      // display: inline-block;
-      // height: 30px;
-      // width: 30px;
-      // border: 1px solid red;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 0;
-      height: 0;
-      opacity: 0.5;
-      border-radius: 50%;
-      background: #fff;
-      pointer-events: none;
-      animation: btnClick 1s linear 1;
+  .btn2 {
+    height: 100px;
+    display: flex;
+    align-items: center;
+
+    .btnPrimary2 {
+      color: #fff;
+      position: relative;
+
+      cursor: pointer;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      height: 50px;
+      width: 100px;
+      overflow: hidden;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(90deg, #409eff, #ccc);
+
+      &:hover {
+        background: linear-gradient(90deg, #ff40b6ab, #ccc);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -40%;
+        width: 15%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, #fff, transparent);
+        transform: skew(-45deg);
+      }
+
+      &:hover::before {
+        left: 120%;
+        transition: all 1s;
+      }
     }
+
+  }
+
+  .btn3 {
+    height: 100px;
+
+    .btnPrimary3 {
+      color: #fff;
+      position: relative;
+      cursor: pointer;
+      border-radius: 4px;
+      height: 50px;
+      width: 100px;
+      border: none;
+      text-decoration: none;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(90deg, #03a9f4, #F441a5, #ffeb3b, #03a9f4);
+      background-size: 400%;
+
+      @keyframes changeLight {
+        0% {
+          background-position: 0 0;
+        }
+
+        100% {
+          background-position: 400% 0;
+        }
+      }
+
+      &:hover {
+        animation: changeLight 8s linear infinite;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        bottom: -5px;
+        left: -5px;
+        z-index: 1;
+        background: linear-gradient(90deg, #03a9f4, #F441a5, #ffeb3b, #03a9f4);
+        background-size: 400%;
+        border-radius: 4px;
+        opacity: 0;
+        transition: all 2s;
+      }
+
+      &:hover::before {
+        opacity: 0.6;
+        filter: blur(20px);
+      }
+
+    }
+
+  }
+
+  .imgChange {
+    height: 145px;
+    border: 1px solid #f2f2f2;
   }
 
 }

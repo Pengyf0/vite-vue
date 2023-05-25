@@ -16,17 +16,11 @@ wss.on('connection', (ws) => {
     console.log(`Received => ${msg}`);
     console.log(`${msg}`, preMsg)
     preMsg.push(`${msg}`)
+    // 处理客户端发送的消息，如发送给其他客户端等
     wss.clients.forEach(client => {
       if (client !== ws && client.readyState === ws.OPEN) {
         client.send(msg)
       }
     })
-    // 处理客户端发送的消息，如发送给其他客户端等
-    // wss.clients.forEach((client) => {
-    //   console.log(client !== ws, 99, client.readyState, WebSocket.OPEN)
-    //   if (client !== ws && client.readyState === WebSocket.OPEN) {
-    //     client.send(message);
-    //   }
-    // });
   });
 });

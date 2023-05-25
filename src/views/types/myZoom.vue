@@ -38,7 +38,7 @@ function findNode(tree, path, val) {
     if (foundPath) return foundPath  // 如果找到,返回路径
   }
 }
-const path = findNode(tree, [], '6')
+const path = findNode(tree, [], '6')//分别传入数组，默认路径，要查的值。只能找到第一个
 console.log(path, 999)
 
 </script>

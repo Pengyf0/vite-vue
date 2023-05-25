@@ -1,7 +1,6 @@
 /** 
 深度克隆方法，解决循环引用
 */
-created() { window.addEventListener('beforeunload', () => { sessionStorage.setItem('list', JSON.stringify(this.$store.state)) }) try { sessionStorage.getItem('list') && this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem('list')))) } catch (err) { console.log(err); } sessionStorage.removeItem("list"); }
 
 let obj = {
   arr: [{ age: 10 }],

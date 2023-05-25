@@ -1,3 +1,4 @@
+//一个数组过滤方法    
 //对设置或者根据名字获取cookie
 export function setCookie(name, value, day) {
   let date = new Date()
