@@ -59,20 +59,5 @@ function tabChange(ind) {
   transform: translateY(-1rem) rotate(3deg);
   margin-right: 6em;
 }
-
-&.is-active {
-  color: $active;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  position: relative;
-
-  &:before {
-    color: #000;
-    background: $active;
-    position: absolute;
-    border-radius: 50%;
-    box-shadow: 0 0 0 999px rgba(0, 0, 0, 0.8);
-  }
-}
 </style>
 

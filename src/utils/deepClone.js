@@ -25,7 +25,7 @@ obj.to = obj2
 
 
 //缓存已经处理的OBj
-let cacheData = new WeakMap();//let cacheData = new Map();Map()效果略差
+let cacheData = new WeakMap();//let cacheData = new Map();Map()效果略差，如果obj 被清除，Map还会存在
 
 function deepClone(obj) {
   // 基础变量处理
@@ -64,8 +64,8 @@ function deepClone(obj) {
     return temp
   }
 }
-let objClone = deepClone(obj);
-console.log(obj, objClone)
+// let objClone = deepClone(obj);
+// console.log(obj, objClone)
 
 //第二种 MessChannel方法，除了function 其他完美客隆
 // function deepCopy(obj) {
@@ -90,7 +90,7 @@ function getInit(target) {
   const Ctor = target.constructor;
   return new Ctor();
 }
-
+//第三种添加类型
 function deepClone3(target, map = new WeakMap()) {
   // 处理原始类型和函数
   if (!isObject(target)) {
@@ -139,7 +139,7 @@ function deepClone3(target, map = new WeakMap()) {
 }
 
 // 示例
-const obj = {
+const obj3 = {
   a: 1,
   b: [1, 2, 3],
   c: {
@@ -153,5 +153,30 @@ const obj = {
   },
 };
 
-const clonedObj = deepClone3(obj);
-console.log(clonedObj);
+// const clonedObj = deepClone3(obj);
+// console.log(clonedObj);
+
+
+
+//完整简化版本
+
+let cache4 = new WeakMap()
+function deepClone4(value) {
+
+  if (typeof value !== 'object' || value !== null) return value
+
+  const result = Array.isArray(value) ? [] : {};
+  Object.setPrototypeOf(result, Object.getPrototypeOf(value))
+
+  const isCache = cache4.get(value)
+  if (isCache) return isCache
+
+  for (const key in value) {
+    if (value.hasOwnProperty(key)) {//去除原型链属性
+      result[key] = deepClone4(value[key])
+    }
+  }
+  return result
+}
+let objClone = deepClone4(obj);
+console.log(obj, objClone)

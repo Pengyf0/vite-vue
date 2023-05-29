@@ -7,7 +7,10 @@
       <div class="slider" ref="slider" @mousedown="startChange">
         <span class="tag-icon"></span>
       </div>
-      <img class="base-image" :src="images[1]" alt="" />
+      <div class="base-image">
+        <img :src="images[1]" alt="" />
+      </div>
+
     </div>
   </div>
 </template>
@@ -38,10 +41,8 @@ export default {
       window.removeEventListener("mouseup", this.endChange);
     },
     moveHandler(e) {
-
       this.$refs.slider.style.left = (e.pageX - this.offsetX || 0) > 500 ? '500px' : (e.pageX - this.offsetX || 0) + "px";
       this.$refs.coverImage.style.width = (e.pageX - this.offsetX || 0) > 500 ? '500px' : (e.pageX - this.offsetX || 0) + "px";
-      console.log(this.$refs.coverImage.style.width)
     }
   }
 };
@@ -89,14 +90,23 @@ export default {
   }
 
   .cover-image {
-    left: 0;
-    width: 100%;
-    z-index: 20;
+    width: 0;
+    z-index: 1;
+
+    img {
+      max-height: 100%;
+    }
   }
 
-  img {
-    max-height: 100%;
+  .base-image {
+    height: 100%;
+
+    img {
+      max-height: 100%;
+    }
   }
+
+
 }
 </style>
   

@@ -120,11 +120,22 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          图片
+          图片变换
         </div>
       </template>
       <div class="imgChange">
         <images :images="imgs"></images>
+      </div>
+
+    </el-card>
+    <el-card class="box-card">
+      <template #header>
+        <div class="card-header">
+          canvas图片
+        </div>
+      </template>
+      <div class="canDemo">
+        <canvasDemo></canvasDemo>
       </div>
 
     </el-card>
@@ -137,6 +148,8 @@
 import { ref, onMounted, inject, reactive } from "vue";
 import { debounce, throttle2 } from "@/utils/debounce.js"
 import images from "@/components/mouseImg/CompareImage.vue"
+import canvasDemo from "@/components/canvas/canvas.vue"
+
 import bg6 from '@/assets/images/bg6.jpeg'
 import bg7 from '@/assets/images/bg7.jpeg'
 
@@ -706,6 +719,11 @@ function addWave() {//增加按钮波纹
   }
 
   .imgChange {
+    height: 145px;
+    border: 1px solid #f2f2f2;
+  }
+
+  .canDemo {
     height: 145px;
     border: 1px solid #f2f2f2;
   }

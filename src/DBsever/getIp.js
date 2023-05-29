@@ -13,6 +13,6 @@ function getLocalIP() {
   }
 }
 const ip = getLocalIP()
-console.log('内网地址', ip)
+console.log('内网地址只能放在node环境中启动', ip)
 
 

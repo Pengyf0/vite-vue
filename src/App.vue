@@ -5,11 +5,6 @@
   </div>
 </template>
 <script setup>
-import { ref, onBeforeMount, onMounted } from "vue";
-
-defineProps({
-  msg: String,
-});
 // let timeStart = performance.now()
 // console.log(1, timeStart)
 // onMounted(() => {
@@ -23,7 +18,6 @@ defineProps({
 //   console.log('首屏时间：', firstScreenTime)
 // })
 
-const addCount = ref(0);
 </script>
 
 <style lang="scss" scoped></style>
